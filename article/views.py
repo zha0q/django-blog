@@ -7,11 +7,18 @@ from article.models import Article
 from article.serializers import ArticlesSerializer, ArticlesDetailSerializer
 from rest_framework.permissions import IsAuthenticated
 
+from django.views.generic.base import TemplateView
+
 #
 # class CategoryViewSet(viewsets.ModelViewSet):
 #     """分类视图集"""
 #     queryset = Category.objects.all()
 #     serializer_class = CategorySerializer
+
+class IndexTemplateView(TemplateView):
+    def get_template_names(self):
+        template_name = "index.html"
+        return template_name
 
 
 
