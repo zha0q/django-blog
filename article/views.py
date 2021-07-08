@@ -15,11 +15,6 @@ from django.views.generic.base import TemplateView
 #     queryset = Category.objects.all()
 #     serializer_class = CategorySerializer
 
-class IndexTemplateView(TemplateView):
-    def get_template_names(self):
-        template_name = "index.html"
-        return template_name
-
 
 
 class ArticleViewSet(viewsets.ModelViewSet):

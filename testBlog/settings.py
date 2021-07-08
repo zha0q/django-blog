@@ -84,7 +84,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/dist/static'),
 ]
 
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+
 WSGI_APPLICATION = 'testBlog.wsgi.application'
+
 
 
 # Database
@@ -158,9 +163,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+
 #
-STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+
 
 
 # Default primary key field type
