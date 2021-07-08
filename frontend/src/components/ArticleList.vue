@@ -31,7 +31,7 @@ export default {
 
       blogs: [],
       loading: false,
-      nextUrl: "/api/article/",
+      nextUrl: '/api/article/',
 
     }
   },
@@ -54,7 +54,7 @@ export default {
       getBlogs(this.nextUrl).then(response => {
         console.log(response.data)
         this.blogs = this.blogs.concat(response.data.results)
-        this.nextUrl = response.data.next
+        this.nextUrl = '/api/article/' + response.data.next
         console.log(this.next)
       })
 

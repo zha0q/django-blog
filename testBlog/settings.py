@@ -88,15 +88,34 @@ WSGI_APPLICATION = 'testBlog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # 数据库引擎
-        'NAME': 'testBlog', # 数据库名
-        'USER': 'root', # 账号
-        'PASSWORD': 'root', # 密码
-        'HOST': '47.94.108.190', # HOST
-        'POST': 3306, # 端口
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', # 数据库引擎
+#         'NAME': 'testBlog', # 数据库名
+#         'USER': 'root', # 账号
+#         'PASSWORD': 'root', # 密码
+#         'HOST': '127.0.0.1', # HOST
+#         'POST': 3306, # 端口
+#
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', # 数据库引擎
+#         'NAME': 'testBlog', # 数据库名
+#         'USER': 'root', # 账号
+#         'PASSWORD': 'root', # 密码
+#         'HOST': '47.94.108.190', # HOST
+#         'POST': 3306, # 端口
+#
+#     }
+# }
 
 
 # Password validation
@@ -136,7 +155,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+#
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
 

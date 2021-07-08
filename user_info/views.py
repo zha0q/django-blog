@@ -9,4 +9,4 @@ from user_info.serializers import UserRegisterSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserRegisterSerializer
-    lookup_field = r'name'
+    lookup_field = 'username'
