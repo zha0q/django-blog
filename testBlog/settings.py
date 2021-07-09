@@ -67,7 +67,7 @@ ROOT_URLCONF = 'testBlog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['frontend/dist'],
+        'DIRS': [os.path.join(BASE_DIR, 'dist')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,11 +80,7 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend/dist/static'),
-]
 
-STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
@@ -194,3 +190,8 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=7),
 }
 
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/dist/static'),
+]
