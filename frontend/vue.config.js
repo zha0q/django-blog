@@ -1,15 +1,3 @@
-const path = require("path")
-
-function resolve(dir) {
-  return path.join(__dirname, dir);
-}
-
 module.exports = {
-   chainWebpack: config => {
-    config.resolve.alias
-      .set("@", resolve("src"))
-      .set("assets", resolve("src/assets"))
-  },
-  publicPath: './',
-  assetsDir: "static",  // 静态文件打包到dist/static中
+  assetsDir: 'static', //指定'bulid'时,在静态文件上一层添加static目录
 }
