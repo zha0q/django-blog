@@ -1,3 +1,14 @@
 module.exports = {
-  assetsDir: 'static', //指定'bulid'时,在静态文件上一层添加static目录
-}
+    devServer: {
+        proxy: {
+            // detail: https://cli.vuejs.org/config/#devserver-proxy
+            '/api': {
+                target: `http://127.0.0.1:8000/api`,
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
+    }
+};

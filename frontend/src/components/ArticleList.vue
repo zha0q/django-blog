@@ -54,7 +54,7 @@ export default {
       getBlogs(this.nextUrl).then(response => {
         console.log(response.data)
         this.blogs = this.blogs.concat(response.data.results)
-        this.nextUrl = '/api/article/' + response.data.next
+        this.nextUrl = response.data.next
         console.log(this.next)
       })
 
