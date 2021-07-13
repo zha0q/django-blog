@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from article.models import Article
+from article.models import Article, Avatar
 from user_info.serializers import UserDescSerializer
 from comment.serializers import CommentSerializer
 
@@ -11,14 +11,35 @@ from comment.serializers import CommentSerializer
 #         model = Category
 #         fields = '__all__'
 #         read_only_fields = ['created']
+class AvatarSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name="avatar-detail")
+
+    class Meta:
+        model = Avatar
+        fields = '__all__'
+
+
 
 
 class ArticlesBaseSerializer(serializers.HyperlinkedModelSerializer):
     author = UserDescSerializer(read_only=True)
     id = serializers.IntegerField(read_only=True)
-
-
     url = serializers.HyperlinkedIdentityField(view_name="article-detail")
+
+    avatar = AvatarSerializer(read_only=True)
+    avatar_id = serializers.IntegerField(
+        write_only=True,
+        allow_null=True,
+        required=False
+    )
+
+    # 验证图片 id 是否存在
+    # 不存在则返回验证错误
+    def validate_avatar_id(self, value):
+        if not Avatar.objects.filter(id=value).exists() and value is not None:
+            raise serializers.ValidationError("Avatar with id {} not exists.".format(value))
+
+        return value
 
 
 

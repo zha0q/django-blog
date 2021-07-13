@@ -35,7 +35,7 @@ export default {
 
       blogs: [],
       loading: false,
-      nextUrl: 'http://127.0.0.1:8000/api/article/',
+      nextUrl: '/api/article/',
 
     }
   },
@@ -90,38 +90,10 @@ p {
   text-align: center;
 }
 
-.article {
 
-  height: 10em;
-  padding: 10px;
 
-  background-color: #ffffff;
 
-  border: 2px solid #eee;
-  border-radius: 4px;
-}
 
-.ttitle {
 
-  color: #121212;
-  font-size:  24px;
-  text-decoration: none;
-}
-
-.content {
-  float: left;
-  height: 100px;
-  overflow: hidden;
-  text-overflow-ellipsis: true;
-  word-wrap: break-word;
-  margin-top: 12px;
-  line-height: 1.67;
-}
-
-.avatar {
-  height: 178px;
-  width: auto;
-  display: block;
-}
 
 </style>

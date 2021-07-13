@@ -1,4 +1,9 @@
 module.exports = {
+
+
+    assetsDir: 'static',
+
+
     devServer: {
         proxy: {
             // detail: https://cli.vuejs.org/config/#devserver-proxy

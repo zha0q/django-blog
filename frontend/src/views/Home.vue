@@ -2,7 +2,7 @@
   <el-container class="hello">
 
     <el-header>
-      <BlogHeader :active-index="'1'"></BlogHeader>
+      <BlogHeader :active-index="'5'"></BlogHeader>
     </el-header>
     <el-main class="main">
       <ArticleList></ArticleList>
@@ -18,7 +18,7 @@
 
 <script>
 import {getBlogs, postBlog} from "../api/api";
-import ArticleList from "../components/ArticleList";
+import ArticleList from "./ArticleList";
 import BlogHeader from "../components/BlogHeader";
 
 export default {

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'markdown',
     'comment',
+    'subscribe'
 
 ]
 
@@ -68,7 +69,7 @@ ROOT_URLCONF = 'testBlog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend/dist')],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend')],
         # 'DIRS': ['frontend/dist'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -85,7 +86,7 @@ TEMPLATES = [
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend/dist/static'),
+    os.path.join(BASE_DIR, 'frontend'),
 ]
 
 
@@ -198,3 +199,5 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=7),
 }
 
+MEDIA_URL =  '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

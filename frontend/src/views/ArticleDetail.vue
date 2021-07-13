@@ -8,15 +8,17 @@
       <div class="article">
         <h1 class="ttitle">
           {{article.a_title}}
-          <div class="aauthor assist">
+          <div @click="visit(article.author.username)" class="aauthor assist">
             {{article.author.username}}<br>发布于
             {{format_time(article.created)}}
           </div>
         </h1>
+        <img :src="avatar" class="avatar">
 
         <div v-html="article.body_html" class="body"></div>
 
       </div>
+
 
 
     </el-main>
@@ -66,6 +68,7 @@ export default {
         author: '',
         created: '',
       },
+      avatar: '',
       comment: '',
       comments: [],
     })
@@ -73,9 +76,11 @@ export default {
 
   methods: {
     load() {
-      getBlogs('/api/article/' + this.$route.params.id)
+      getBlogs('/api/article/' + this.$route.params.id + '/')
       .then(response => {
+        console.log(response)
         this.article = response.data
+        this.avatar = response.data.avatar.content
       })
       getBlogs('/api/comment/')
       .then(response => {
@@ -106,6 +111,9 @@ export default {
     calls(uname) {
       this.comment = this.comment + '@' + uname
     },
+    visit(author) {
+      this.$router.push({name: 'UserView', params: {username: author}})
+    }
   },
 
 }
@@ -113,11 +121,7 @@ export default {
 
 <style scoped>
 
-.main {
-  font: 13px Small;
-  margin-left: 10em;
-  margin-right: 10em;
-}
+
 
 .article {
 
@@ -128,11 +132,13 @@ export default {
 
   border: 2px solid #eee;
   border-radius: 4px;
+
+  overflow: hidden;
 }
 
 .ttitle {
   display: block;
-  font: 20px Extra large;
+  font: 24px Extra large;
   margin: 30px;
 }
 
@@ -145,6 +151,12 @@ export default {
 .assist {
   color: #bdb4b7;
   font: 10px Extra Small;
+}
+
+.avatar {
+  float: right;
+  height: 178px;
+  width: 178px;
 }
 
 .body {

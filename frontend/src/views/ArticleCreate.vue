@@ -1,11 +1,18 @@
 <template>
   <div>
-    <BlogHeader :active-index="'2'"></BlogHeader>
+    <el-header>
+      <BlogHeader :active-index="'2'"></BlogHeader>
+    </el-header>
+
     <el-form :model="form" label-width="80px" class="main">
 
 
       <el-form-item label="标题">
         <el-input v-model="form.title"></el-input>
+      </el-form-item>
+      <el-form-item label="图片">
+        <img v-if="image" :src="image" class="avatar">
+        <input type="file" @change="imgSubmit"></input>
       </el-form-item>
       <div class="toolbar">
         <el-button-group>
@@ -40,7 +47,8 @@
 
 <script>
 import BlogHeader from "../components/BlogHeader";
-import {postBlog} from "../api/api";
+import {postBlog, postImg} from "../api/api";
+const token = localStorage.getItem('token')
 // import authorization from '@/utils/authorization'
 export default {
 name: "ArticleCreate",
@@ -57,10 +65,37 @@ name: "ArticleCreate",
         content: '',
       },
       username: '',
+      image: '',
+      imageId: '',
     })
   },
 
   methods: {
+    imgSubmit(e) {
+      if(!this.username)
+      {
+        alert('请登录！');
+        setTimeout(() => {
+          this.$router.push({name: 'Login'});
+        }, 500)
+      }
+      else
+      {
+
+        let formData = new FormData();
+        formData.append('content', e.target.files[0])
+        postImg(formData)
+        .then(response => {
+          if(response.status >= 200 && response.status < 300)
+          {
+            alert("图片上传成功")
+            this.image = response.data.content
+            this.imageId = response.data.id
+          }
+        })
+      }
+    },
+
     onSubmit() {
       if(!this.username)
       {
@@ -71,12 +106,17 @@ name: "ArticleCreate",
       }
       else
       {
-        const token = localStorage.getItem('token')
-        console.log(token)
-        postBlog(this.form.title, this.form.content, token)
+
+        postBlog(this.form.title, this.imageId, this.form.content, token)
           .then(response => {
-            const status = response.data
-            console.log(status)
+            if(response.status >= 200 && response.status < 300) {
+              alert("发表成功!")
+              setTimeout(() => {
+                console.log(response)
+                this.$router.push("/article/" + response.data.id)
+              }, 500)
+
+            }
           })
       }
     },
@@ -98,6 +138,12 @@ name: "ArticleCreate",
   margin-right: 20em;
   text-align: center;
   background-color: white;
+}
+
+.avatar {
+  height: 178px;
+  width: 178px;
+  display: block;
 }
 
 .toolbar {

@@ -6,11 +6,20 @@ from django.contrib.auth.models import User
 from markdown import Markdown
 
 
-
+class Avatar(models.Model):
+    content = models.ImageField(upload_to='avatar/%Y%M%D')
 
 class Article(models.Model):
 
     a_title = models.CharField(max_length=30)
+
+    avatar = models.ForeignKey(
+        Avatar,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='article'
+    )
 
     a_content = models.TextField()
 

@@ -14,7 +14,7 @@
       <el-menu-item v-if="!username"  index="4" style="float: right" @click="jumpTo('Register')">
         <router-link :to="{name: 'Register'}" class="link">注册</router-link>
       </el-menu-item>
-      <el-menu-item v-if="username" index="5" style="float: right" @click="jumpTo('UserCenter')">
+      <el-menu-item v-if="username" index="5" style="float: right" @click="jumpTo('UserView')">
         <div class="link">{{username}}</div>
       </el-menu-item>
       <el-menu-item v-if="username" index="6" style="float: right" @click="jumpTo('Logout')">
@@ -25,10 +25,9 @@
 </template>
 
 <script>
-import UserCenter from "../views/UserCenter";
 
 export default {
-  name: "blog-header",
+  name: "BlogHeader",
   props: {
     activeIndex: '',
   },
@@ -66,8 +65,10 @@ export default {
       console.log("out")
     },
     jumpTo(rut) {
-      if(rut === 'UserCenter')
-        this.$router.push({name: 'UserCenter', params: {username: this.username}})
+      if(rut === 'UserView') {
+        this.$router.push({name: rut, params: {username: this.username}})
+        location.reload()
+      }
       else
         this.$router.push({name: rut})
     }

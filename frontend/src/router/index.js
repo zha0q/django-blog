@@ -7,6 +7,8 @@ import ArticleDetail from "../views/ArticleDetail";
 import Register from "../views/Register";
 import Login from "../views/Login";
 import ArticleCreate from "../views/ArticleCreate";
+import UserView from "../views/UserView";
+
 
 Vue.use(Router)
 
@@ -18,6 +20,7 @@ export default new Router({
       name: 'Home',
       component: Home
     },
+
     {
       path: '/article/:id',
       name: 'ArticleDetail',
@@ -38,5 +41,17 @@ export default new Router({
       name: 'ArticleCreate',
       component: ArticleCreate
     },
+    {
+      path: '/userview/:username',
+      name: 'UserView',
+      component: UserView
+    },
   ]
 })
+
+
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BlogHeader :active-index="'4'"></BlogHeader>
+    <BlogHeader :active-index="'4'"/>
     <el-form ref="form" :model="form" label-width="80px" class="main">
       <el-form-item label="昵称">
         <el-input v-model="form.name"></el-input>
