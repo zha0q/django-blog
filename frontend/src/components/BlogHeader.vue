@@ -8,23 +8,27 @@
       <el-menu-item index="2" @click="jumpTo('ArticleCreate')">
         <router-link :to="{name: 'ArticleCreate'}" class="link">发表文章</router-link>
       </el-menu-item>
-      <el-menu-item v-if="!username" index="3" class="login"  @click="jumpTo('Login')">
+      <el-menu-item v-if="!username" index="3" style="float: right"  @click="jumpTo('Login')">
         <router-link :to="{name: 'Login'}" class="link">登录</router-link>
       </el-menu-item>
-      <el-menu-item v-if="!username"  index="4" class="register" @click="jumpTo('Register')">
+      <el-menu-item v-if="!username"  index="4" style="float: right" @click="jumpTo('Register')">
         <router-link :to="{name: 'Register'}" class="link">注册</router-link>
       </el-menu-item>
-      <el-menu-item v-if="username" index="5" class="logout" @click="jumpTo('Logout')">
-        <div class="link" @click="logout">{{username}}</div>
+      <el-menu-item v-if="username" index="5" style="float: right" @click="jumpTo('UserCenter')">
+        <div class="link">{{username}}</div>
+      </el-menu-item>
+      <el-menu-item v-if="username" index="6" style="float: right" @click="jumpTo('Logout')">
+        <div class="link" @click="logout">登出</div>
       </el-menu-item>
     </el-menu>
 
 </template>
 
 <script>
-export default {
-  name: "BlogHeader",
+import UserCenter from "../views/UserCenter";
 
+export default {
+  name: "blog-header",
   props: {
     activeIndex: '',
   },
@@ -62,7 +66,10 @@ export default {
       console.log("out")
     },
     jumpTo(rut) {
-      this.$router.push({name: rut})
+      if(rut === 'UserCenter')
+        this.$router.push({name: 'UserCenter', params: {username: this.username}})
+      else
+        this.$router.push({name: rut})
     }
   },
 
@@ -70,9 +77,7 @@ export default {
 </script>
 
 <style scoped>
-  .login,.register, .logout{
-    float: right;
-  }
+
   .link{
     text-decoration: none;
   }

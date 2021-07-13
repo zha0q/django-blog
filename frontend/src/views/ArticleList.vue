@@ -6,7 +6,12 @@
       v-infinite-scroll="load"
       infinite-scroll-disabled="disabled">
       <li v-for="i in blogs" :key="i.id" class="article" style="display:block">
-        <router-link :to="{name: 'ArticleDetail', params: {id: i.id}}" class="ttitle">{{i.a_title}}</router-link>
+        <div style="width: 100%;">
+          <router-link :to="{name: 'ArticleDetail', params: {id: i.id}}" class="ttitle">{{i.a_title}}</router-link>
+        </div>
+        <div class="content">
+          <img :src="i.avatar.content" class="avatar">
+        </div>
         <div class="content">
           {{i.author.username}}：{{i.a_content}}
         </div>
@@ -22,7 +27,6 @@
 
 <script>
 import {getBlogs} from "../api/api";
-
 export default {
   name: "ArticleList",
 
@@ -31,7 +35,7 @@ export default {
 
       blogs: [],
       loading: false,
-      nextUrl: '/api/article/',
+      nextUrl: 'http://127.0.0.1:8000/api/article/',
 
     }
   },
@@ -98,12 +102,14 @@ p {
 }
 
 .ttitle {
+
   color: #121212;
-  font-size:  18px;
+  font-size:  24px;
   text-decoration: none;
 }
 
 .content {
+  float: left;
   height: 100px;
   overflow: hidden;
   text-overflow-ellipsis: true;
@@ -112,5 +118,10 @@ p {
   line-height: 1.67;
 }
 
+.avatar {
+  height: 178px;
+  width: auto;
+  display: block;
+}
 
 </style>
